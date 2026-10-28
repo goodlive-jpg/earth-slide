@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bánh Trôi Nước - Hồ Xuân Hương</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="slide-container">
+        <!-- Slide 1 -->
+        <section class="slide active">
+            <div class="slide-content title-slide">
+                <div class="flower float">🌸</div>
+                <h1 class="title-main animate-fade-up">BÁNH TRÔI NƯỚC</h1>
+                <p class="title-sub animate-fade-up delay-1">Hồ Xuân Hương</p>
+                <div class="decorative-line animate-fade-up delay-2"></div>
+                <p class="title-author animate-fade-up delay-3">Vẻ đẹp và phẩm chất người phụ nữ Việt Nam</p>
+                <div class="flower float delay-4">🌸</div>
+            </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Giới thiệu tác giả</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="grid-2">
+                    <div class="card animate-fade-up delay-2">
+                        <div class="icon-circle">👩</div>
+                        <h3>Hồ Xuân Hương</h3>
+                        <ul>
+                            <li>Thơ Nôm – nhà thơ nữ lớn nhất Việt Nam</li>
+                            <li>Sống cuối thế kỷ XVIII – đầu XIX</li>
+                            <li>Được mệnh danh "Bà chúa thơ Nôm"</li>
+                            <li>Quê quán: Nghệ An</li>
+                        </ul>
+                    </div>
+                    <div class="card animate-fade-up delay-3">
+                        <div class="icon-circle">✍️</div>
+                        <h3>Phong cách nghệ thuật</h3>
+                        <ul>
+                            <li>Giọng thơ hóm hỉnh, trào phúng tài hoa</li>
+                            <li>Chân thực, đằm thắm mà sâu sắc</li>
+                            <li>Thể hiện tâm hồn phụ nữ thời phong kiến</li>
+                            <li>Kết hợp hài hòa giữa trào phúng và trân trọng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Nguyên tác bài thơ</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="poem-card animate-fade-up delay-2">
+                    <div class="poem-text">
+                        <div class="poem-line" data-line="1">Thân em vừa trắng lại vừa tròn</div>
+                        <div class="poem-line" data-line="2">Bảy nổi ba chìm với nước non</div>
+                        <div class="poem-line" data-line="3">Rắn nát mặc dầu tay kẻ nặn</div>
+                        <div class="poem-line" data-line="4">Mà em vẫn giữ tấm lòng son</div>
+                    </div>
+                    <button class="click-btn" id="revealPoemBtn">
+                        <span>Hiện từng câu thơ</span>
+                        <span>↓</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Phân tích câu 1</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="explanation-item animate-fade-up delay-2">
+                    <div class="number-badge">1</div>
+                    <div style="flex: 1;">
+                        <p class="poem-quote">"Thân em vừa trắng lại vừa tròn"</p>
+                        <p><strong>Hình ảnh bánh trôi:</strong> Trắng ngần, tròn đều – đẹp tự nhiên, giản dị.</p>
+                        <p style="margin-top: 12px;"><strong>Hình ảnh người phụ nữ:</strong> Vẻ đẹp thuần khiết, đầy đặn, đoan trang.</p>
+                    </div>
+                </div>
+                <div class="grid-2" style="margin-top: 24px;">
+                    <div class="card animate-fade-up delay-3">
+                        <h3 style="color: var(--accent);">Ẩn dụ kép</h3>
+                        <p>Bánh trôi nước vừa là thực thể, vừa là biểu tượng cho người con gái Việt Nam.</p>
+                    </div>
+                    <div class="card animate-fade-up delay-4">
+                        <h3 style="color: var(--accent-pink);">Ngôn từ tinh tế</h3>
+                        <p>"Trắng" – thuần khiết, "tròn" – đầy đặn, hài hòa, hoàn mỹ.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Phân tích câu 2</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="explanation-item animate-fade-up delay-2">
+                    <div class="number-badge">2</div>
+                    <div style="flex: 1;">
+                        <p class="poem-quote">"Bảy nổi ba chìm với nước non"</p>
+                        <p><strong>Hình ảnh trực tiếp:</strong> Bánh trôi nổi chìm, trôi dạt theo dòng nước.</p>
+                        <p style="margin-top: 12px;"><strong>Ý nghĩa:</strong> Cuộc đời người phụ nữ lênh đênh, chịu nhiều biến cố.</p>
+                    </div>
+                </div>
+                <div class="card animate-fade-up delay-3" style="margin-top: 24px;">
+                    <h3>Nghệ thuật</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
+                        <span class="tag">So sánh</span>
+                        <span class="tag">Tương phản</span>
+                        <span class="tag">Hình ảnh ước lệ</span>
+                        <span class="tag">Cặp số "bảy nổi ba chìm"</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Phân tích câu 3</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="explanation-item animate-fade-up delay-2">
+                    <div class="number-badge">3</div>
+                    <div style="flex: 1;">
+                        <p class="poem-quote">"Rắn nát mặc dầu tay kẻ nặn"</p>
+                        <p><strong>Hình ảnh:</strong> Bánh trôi dù bị nhào nặn vẫn có thể tan rã.</p>
+                        <p style="margin-top: 12px;"><strong>Ý nghĩa:</strong> Dù bị xã hội định đoạt, người phụ nữ vẫn có thể bị tổn thương.</p>
+                    </div>
+                </div>
+                <div class="card animate-fade-up delay-3" style="margin-top: 24px; text-align: center;">
+                    <div class="icon-circle" style="margin: 0 auto 16px;">⚖️</div>
+                    <h3>Tố cáo bất công</h3>
+                    <p>Hồ Xuân Hương tố cáo xã hội phong kiến đã bất công với người phụ nữ.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Phân tích câu 4</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="explanation-item animate-fade-up delay-2">
+                    <div class="number-badge">4</div>
+                    <div style="flex: 1;">
+                        <p class="poem-quote">"Mà em vẫn giữ tấm lòng son"</p>
+                        <p><strong>Lòng son:</strong> Lòng trung thành, trong sáng, thủy chung.</p>
+                        <p style="margin-top: 12px;"><strong>Ý nghĩa:</strong> Dù hoàn cảnh thế nào, người phụ nữ vẫn giữ gìn phẩm chất cao quý.</p>
+                    </div>
+                </div>
+                <div class="grid-2" style="margin-top: 24px;">
+                    <div class="card animate-fade-up delay-3">
+                        <h3 style="color: var(--accent-pink);">Đối lập nghệ thuật</h3>
+                        <p>"Rắn nát" – "vẫn giữ" tạo sự đối lập mạnh mẽ.</p>
+                    </div>
+                    <div class="card animate-fade-up delay-4">
+                        <h3 style="color: var(--accent);">Ca ngợi cao đẹp</h3>
+                        <p>Khẳng định giá trị bất diệt của vẻ đẹp tâm hồn.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Nghệ thuật đặc sắc</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="grid-2">
+                    <div class="card animate-fade-up delay-2">
+                        <div class="icon-circle">🎭</div>
+                        <h3>Ẩn dụ, so sánh</h3>
+                        <p>Bánh trôi = Người phụ nữ. Chuyển từ hình tượng dân gian thành biểu tượng nhân văn.</p>
+                    </div>
+                    <div class="card animate-fade-up delay-3">
+                        <div class="icon-circle">🔄</div>
+                        <h3>Đối lập</h3>
+                        <p>Trắng tròn – lênh đênh, rắn nát – lòng son</p>
+                    </div>
+                    <div class="card animate-fade-up delay-4">
+                        <div class="icon-circle">💬</div>
+                        <h3>Ngôn ngữ dân dã</h3>
+                        <p>Gần gũi, tự nhiên, giàu sức biểu cảm</p>
+                    </div>
+                    <div class="card animate-fade-up delay-5">
+                        <div class="icon-circle">✨</div>
+                        <h3>Hài hòa cảm xúc</h3>
+                        <p>Trào phúng mà không giễu cợt, thông cảm sâu sắc</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide">
+            <div class="slide-content">
+                <h2 class="animate-fade-up">Nội dung và cảm xúc</h2>
+                <div class="decorative-line left animate-fade-up delay-1"></div>
+                <div class="grid-2">
+                    <div class="card animate-fade-up delay-2">
+                        <h3 style="color: var(--accent);">Nội dung</h3>
+                        <ul>
+                            <li>Ca ngợi vẻ đẹp và phẩm chất cao quý người phụ nữ</li>
+                            <li>Tố cáo xã hội phong kiến bất công</li>
+                            <li>Khẳng định giá trị con người</li>
+                        </ul>
+                    </div>
+                    <div class="card animate-fade-up delay-3">
+                        <h3 style="color: var(--accent-pink);">Cảm xúc</h3>
+                        <ul>
+                            <li>Thông cảm, xót thương</li>
+                            <li>Ngưỡng mộ sức mạnh tinh thần</li>
+                            <li>Tự hào về phẩm giá</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card animate-fade-up delay-4" style="margin-top: 24px; text-align: center;">
+                    <h3>Thông điệp</h3>
+                    <p style="font-size: 1.15rem; margin-top: 12px;">Dù cuộc đời chìm nổi, người phụ nữ vẫn luôn xứng đáng được trân trọng vì vẻ đẹp tâm hồn cao quý.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide">
+            <div class="slide-content">
+                <div class="conclusion-box animate-scale-up">
+                    <div class="flower float">🌸</div>
+                    <h2 style="margin-bottom: 24px;">Kết luận</h2>
+                    <p class="conclusion-text">
+                        "Bánh trôi nước" là tác phẩm ngắn gọn nhưng sâu sắc.<br><br>
+                        Với nghệ thuật ẩn dụ tuyệt vời, Hồ Xuân Hương đã ca ngợi và khẳng định giá trị vĩnh hằng của người phụ nữ Việt Nam.
+                    </p>
+                    <div class="decorative-line"></div>
+                    <p class="thank-you">Xin trân trọng cảm ơn!</p>
+                    <div class="flower float">🌸</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <button class="nav-btn prev" id="prevBtn">←</button>
+    <button class="nav-btn next" id="nextBtn">→</button>
+    
+    <div class="slide-counter">
+        <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
