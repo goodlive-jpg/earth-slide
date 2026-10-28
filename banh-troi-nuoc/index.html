@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bánh Trôi Nước - Hồ Xuân Hương</title>
+  <link rel="stylesheet" href="../../assets/fonts.css">
+  <link rel="stylesheet" href="../../assets/base.css">
+  <link rel="stylesheet" id="theme-link" href="../../assets/themes/soft-pastel.css">
+  <link rel="stylesheet" href="../../assets/animations/animations.css">
+  <style>
+    .poem-text {
+      font-family: 'Noto Serif', serif;
+      font-size: 1.3rem;
+      line-height: 1.9;
+      text-align: center;
+      font-style: italic;
+      color: var(--text-1);
+    }
+    .poem-line {
+      margin: 12px 0;
+      opacity: 0;
+    }
+    .poem-line.active {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .click-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #f8b5d6, #d4a574);
+      color: #5d4037;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+      box-shadow: var(--shadow-2);
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .click-hint:hover { transform: scale(1.05); box-shadow: var(--shadow-3); }
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+    .lantern {
+      width: 60px; height: 80px;
+      background: radial-gradient(ellipse at top, #ffd93d 0%, #ff6b6b 70%);
+      border-radius: 50% 50% 45% 45%;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: 0 0 30px rgba(255, 217, 61, 0.6);
+    }
+    .lantern::after {
+      content: '';
+      position: absolute;
+      bottom: -15px; left: 50%;
+      transform: translateX(-50%);
+      width: 8px; height: 15px;
+      background: #8d6e63;
+    }
+    .cake {
+      width: 80px; height: 60px;
+      background: linear-gradient(to bottom, #f8bbd0 0%, #f48fb1 50%, #e91e63 100%);
+      border-radius: 8px 8px 4px 4px;
+      position: relative;
+      margin: 0 auto;
+    }
+    .cake::before {
+      content: '';
+      position: absolute;
+      top: -10px; left: 10px;
+      width: 60px; height: 15px;
+      background: #fff3e0;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="deck">
+    <!-- Slide 1: Title -->
+    <section class="slide is-active">
+      <div class="slide-content" style="text-align: center; justify-content: center;">
+        <div class="lantern float" data-anim="fade-up"></div>
+        <h1 data-anim="fade-up" style="font-size: 3.5rem; margin: 24px 0 16px;">BÁNH TRÔI NƯỚC</h1>
+        <p data-anim="fade-up" style="font-size: 1.6rem; color: var(--text-2); animation-delay: 0.2s;">Cảm xúc và nghệ thuật trong thơ Hồ Xuân Hương</p>
+        <p data-anim="fade-up" style="margin-top: 32px; color: var(--accent); animation-delay: 0.4s;">Nhấn → để xem bài thơ</p>
+      </div>
+    </section>
+
+    <!-- Slide 2: Tác giả -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">1. Tác giả Hồ Xuân Hương</h2>
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; margin-top: 24px; align-items: center;">
+          <div>
+            <ul style="line-height: 2;">
+              <li data-anim="fade-up" style="animation-delay: 0.1s;"><strong>Thời gian:</strong> Cuối thế kỷ XVIII – đầu thế kỷ XIX</li>
+              <li data-anim="fade-up" style="animation-delay: 0.15s;"><strong>Quê quán:</strong> Nghệ An (có nhiều nguồn khác nhau)</li>
+              <li data-anim="fade-up" style="animation-delay: 0.2s;"><strong>Thể loại:</strong> Thơ Nôm – độc đáo, tài hoa</li>
+              <li data-anim="fade-up" style="animation-delay: 0.25s;"><strong>Đặc sắc:</strong> Giọng thơ trào phúng, hóm hỉnh, sâu sắc</li>
+              <li data-anim="fade-up" style="animation-delay: 0.3s;"><strong>Vị trí:</strong> "Bà chúa thơ Nôm" Việt Nam</li>
+            </ul>
+          </div>
+          <div style="text-align: center;" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <div style="width: 200px; height: 260px; margin: 0 auto; background: linear-gradient(135deg, #d7ccc8 0%, #bcaaa4 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; box-shadow: var(--shadow-3);">👩</div>
+            <p style="margin-top: 12px; font-style: italic;">Hồ Xuân Hương</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Hoàn cảnh sáng tác -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">2. Hoàn cảnh sáng tác</h2>
+        <div style="margin-top: 32px;">
+          <div style="padding: 24px; background: var(--surface-2); border-radius: var(--radius-lg); border-left: 4px solid #d4a574; margin-bottom: 16px;" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <h3 style="color: #d4a574;">🌙 Thời điểm</h3>
+            <p>Sáng tác trong hoàn cảnh xã hội phong kiến cuối thời Lê – Trịnh, khi nữ giới bị xem nhẹ.</p>
+          </div>
+          <div style="padding: 24px; background: var(--surface-2); border-radius: var(--radius-lg); border-left: 4px solid #f48fb1; margin-bottom: 16px;" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <h3 style="color: #f48fb1;">🎋 Nguồn cảm hứng</h3>
+            <p>Từ hình ảnh bánh trôi nước – món bánh dân dã, giản dị nhưng chứa đựng nhiều ý nghĩa sâu sắc.</p>
+          </div>
+          <div style="padding: 24px; background: var(--surface-2); border-radius: var(--radius-lg); border-left: 4px solid #64b5f6; margin-bottom: 16px;" data-anim="fade-up" style="animation-delay: 0.3s;">
+            <h3 style="color: #64b5f6;">💭 Tâm hồn</h3>
+            <p>Thể hiện nỗi lòng trăn trở về số phận người phụ nữ trong xã hội xưa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Nguyên tác -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">3. Nguyên tác thơ Nôm</h2>
+        <div style="margin-top: 32px; padding: 32px; background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(244, 143, 177, 0.1) 100%); border-radius: var(--radius-lg); border: 2px solid #d4a574;">
+          <div class="poem-text">
+            <div class="poem-line" data-line="1">Thân em vừa trắng lại vừa tròn</div>
+            <div class="poem-line" data-line="2">Bảy nổi ba chìm với nước non</div>
+            <div class="poem-line" data-line="3">Rắn nát mặc dầu tay kẻ nặn</div>
+            <div class="poem-line" data-line="4">Mà em vẫn giữ tấm lòng son</div>
+          </div>
+          <div class="click-hint" onclick="revealPoem()" style="display: flex; margin: 32px auto 0; width: fit-content;">
+            <span>▼</span>
+            <span>Nhấn để hiện từng câu thơ</span>
+            <span>▼</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Giải nghĩa từng câu -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">4. Giải nghĩa từng câu</h2>
+        <div style="margin-top: 24px; display: grid; gap: 16px;">
+          <div style="padding: 16px 20px; background: var(--surface-2); border-radius: var(--radius-md); display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: start;" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <div style="font-weight: 700; color: #d4a574;">Câu 1</div>
+            <div>
+              <p style="font-style: italic; margin-bottom: 8px;">"Thân em vừa trắng lại vừa tròn"</p>
+              <p style="color: var var(--text-2);">Hình ảnh bánh trôi trắng ngần, tròn đều – đồng thời là hình ảnh người con gái đẹp, thuần khiết.</p>
+            </div>
+          </div>
+          <div style="padding: 16px 20px; background: var(--surface-2); border-radius: var(--radius-md); display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: start;" data-anim="fade-up" style="animation-delay: 0.15s;">
+            <div style="font-weight: 700; color: #f48fb1;">Câu 2</div>
+            <div>
+              <p style="font-style: italic; margin-bottom: 8px;">"Bảy nổi ba chìm với nước non"</p>
+              <p style="color: var(--text-2);">Cuộc đời lênh đênh, trôi nổi. Tả cả hình ảnh bánh trôi trong nước và số phận người phụ nữ.</p>
+            </div>
+          </div>
+          <div style="padding: 16px 20px; background: var(--surface-2); border-radius: var(--radius-md); display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: start;" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <div style="font-weight: 700; color: #64b5f6;">Câu 3</div>
+            <div>
+              <p style="font-style: italic; margin-bottom: 8px;">"Rắn nát mặc dầu tay kẻ nặn"</p>
+              <p style="color: var(--text-2);">Dù bị người khác tạo hình, nhào nặn theo ý muốn, thân phận có thể bị tổn thương nhưng...</p>
+            </div>
+          </div>
+          <div style="padding: 16px 20px; background: var(--surface-2); border-radius: var(--radius-md); display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: start;" data-anim="fade-up" style="animation-delay: 0.25s;">
+            <div style="font-weight: 700; color: #81c784;">Câu 4</div>
+            <div>
+              <p style="font-style: italic; margin-bottom: 8px;">"Mà em vẫn giữ tấm lòng son"</p>
+              <p style="color: var(--text-2);">Vẫn giữ gìn phẩm chất, lòng trung hậu, thuần khiết dù hoàn cảnh thế nào.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Nghệ thuật -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">5. Nghệ thuật đặc sắc</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px;">
+          <div style="padding: 20px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center;" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🎭</div>
+            <h3 style="color: #d4a574;">So sánh - ẩn dụ</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Bánh trôi = người phụ nữ</p>
+          </div>
+          <div style="padding: 20px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center;" data-anim="fade-up" style="animation-delay: 0.15s;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🌊</div>
+            <h3 style="color: #64b5f6;">Từ ngữ sinh động</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">"bảy nổi ba chìm", "nước non"</p>
+          </div>
+          <div style="padding: 20px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center;" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">💚</div>
+            <h3 style="color: #81c784;">Giọng điệu</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Hóm hỉnh, nhẹ nhàng mà sâu sắc</p>
+          </div>
+          <div style="padding: 20px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center;" data-anim="fade-up" style="animation-delay: 0.25s;">
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">✨</div>
+            <h3 style="color: #f48fb1;">Đối lập</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Trắng tròn - lênh đênh, rắn nát - lòng son</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Nội dung tư tưởng -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">6. Nội dung tư tưởng</h2>
+        <div style="margin-top: 32px;">
+          <div style="text-align: center; margin-bottom: 32px;" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <div class="cake float"></div>
+            <h3 style="margin-top: 16px; color: #e91e63;">Ca ngợi vẻ đẹp và phẩm chất người phụ nữ</h3>
+          </div>
+          <ul style="line-height: 2.2; font-size: 1.1rem;">
+            <li data-anim="fade-up" style="animation-delay: 0.15s;">✨ <strong>Vẻ đẹp bên ngoài:</strong> trắng ngần, tròn đầy, duyên dáng</li>
+            <li data-anim="fade-up" style="animation-delay: 0.2s;">💪 <strong>Sức chịu đựng:</strong> Dù cuộc đời nhiều gian truân vẫn kiên cường</li>
+            <li data-anim="fade-up" style="animation-delay: 0.25s;">❤️ <strong>Phẩm chất cao quý:</strong> Trung thực, thủy chung, giữ gìn lương tâm</li>
+            <li data-anim="fade-up" style="animation-delay: 0.3s;">🕊️ <strong>Khát vọng tự do:</strong> Mong muốn được sống bằng chính bản thân mình</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: Thể hiện cảm xúc -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">7. Cảm xúc trong bài thơ</h2>
+        <div style="margin-top: 32px; display: grid; gap: 20px;">
+          <div style="padding: 24px; background: linear-gradient(90deg, rgba(212, 165, 116, 0.2) 0%, transparent 100%); border-left: 4px solid #d4a574; border-radius: var(--radius-md);" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <h3>😌 Thông cảm, xót thương</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Tác giả thương cảm trước số phận chìm nổi của người phụ nữ.</p>
+          </div>
+          <div style="padding: 24px; background: linear-gradient(90deg, rgba(244, 143, 177, 0.2) 0%, transparent 100%); border-left: 4px solid #f48fb1; border-radius: var(--radius-md);" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <h3>💪 Ngưỡng mộ, ca ngợi</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Ngưỡng mộ sức mạnh tinh thần, lòng kiên cường của họ.</p>
+          </div>
+          <div style="padding: 24px; background: linear-gradient(90deg, rgba(129, 199, 132, 0.2) 0%, transparent 100%); border-left: 4px solid #81c784; border-radius: var(--radius-md);" data-anim="fade-up" style="animation-delay: 0.3s;">
+            <h3>🌟 Tự hào</h3>
+            <p style="color: var(--text-2); margin-top: 8px;">Tự hào về phẩm giá cao đẹp, không bao giờ mất đi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: Ý nghĩa -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">8. Ý nghĩa bài thơ</h2>
+        <div style="margin-top: 32px;">
+          <div style="padding: 32px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center; margin-bottom: 24px;" data-anim="fade-up" style="animation-delay: 0.1s;">
+            <h3 style="font-size: 1.8rem; color: #e91e63; margin-bottom: 16px;">Về mặt lịch sử - xã hội</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">Là tiếng nói lên án xã hội phong kiến đã bất công với người phụ nữ Việt Nam.</p>
+          </div>
+          <div style="padding: 32px; background: var(--surface-2); border-radius: var(--radius-lg); text-align: center;" data-anim="fade-up" style="animation-delay: 0.2s;">
+            <h3 style="font-size: 1.8rem; color: #d4a574; margin-bottom: 16px;">Về mặt nhân văn</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8;">Khẳng định giá trị, phẩm hạnh và quyền sống của người phụ nữ. Ca ngợi vẻ đẹp tâm hồn vĩnh hằng.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: Kết luận -->
+    <section class="slide">
+      <div class="slide-content" style="text-align: center; justify-content: center;">
+        <h2 data-anim="fade-up">9. Kết luận</h2>
+        <div style="margin: 32px 0; padding: 40px; background: linear-gradient(135deg, rgba(212, 165, 116, 0.15) 0%, rgba(244, 143, 177, 0.15) 100%); border-radius: var(--radius-lg);" data-anim="fade-up" style="animation-delay: 0.1s;">
+          <p style="font-size: 1.4rem; line-height: 2; font-style: italic; font-family: 'Noto Serif', serif;">
+            "Bánh trôi nước" là một kiệt tác ngắn gọn nhưng sâu sắc.<br>
+            Hồ Xuân Hương đã dùng nghệ thuật tài hoa<br>
+            để ca ngợi và nâng cao giá trị người phụ nữ Việt Nam.
+          </p>
+        </div>
+        <div class="lantern float" data-anim="fade-up" style="animation-delay: 0.2s;"></div>
+        <p data-anim="fade-up" style="margin-top: 24px; font-size: 1.3rem; color: #e91e63; animation-delay: 0.3s;">Xin cảm ơn!</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../assets/runtime.js"></script>
+  <script>
+    let poemStep = 0;
+    function revealPoem() {
+      poemStep++;
+      const line = document.querySelector(`.poem-line[data-line="${poemStep}"]`);
+      if (line) {
+        line.classList.add('active');
+        if (poemStep >= 4) {
+          document.querySelector('.click-hint').style.display = 'none';
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
