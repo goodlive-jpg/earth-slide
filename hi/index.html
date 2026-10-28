@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vật Lý - Chuyển Động & Tương Tác</title>
+  <link rel="stylesheet" href="../../assets/fonts.css">
+  <link rel="stylesheet" href="../../assets/base.css">
+  <link rel="stylesheet" id="theme-link" href="../../assets/themes/tokyo-night.css">
+  <link rel="stylesheet" href="../../assets/animations/animations.css">
+  <style>
+    /* Click-triggered animations */
+    [data-click-anim] {
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.6s ease;
+    }
+
+    [data-click-anim].active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .click-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: all 0.3s ease;
+      user-select: none;
+      box-shadow: var(--shadow-2);
+    }
+
+    .click-hint:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-3);
+    }
+
+    .click-hint .arrow {
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(4px);
+      }
+    }
+
+    .physics-diagram {
+      position: relative;
+      height: 400px;
+      background: linear-gradient(135deg, rgba(122, 162, 247, 0.1) 0%, rgba(187, 154, 247, 0.1) 100%);
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--border);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+
+    .ball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #7aa2f7, #3d59a1);
+      box-shadow: 0 4px 12px rgba(122, 162, 247, 0.5);
+      top: 50px;
+      left: 50px;
+    }
+
+    .ball.active {
+      animation: rollDown 2s ease-in forwards;
+    }
+
+    @keyframes rollDown {
+      0% {
+        top: 50px;
+        left: 50px;
+        transform: rotate(0deg);
+      }
+
+      100% {
+        top: 320px;
+        left: 400px;
+        transform: rotate(720deg);
+      }
+    }
+
+    .force-arrow {
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: #f7768e;
+      top: 150px;
+      left: 100px;
+      transform-origin: left center;
+      opacity: 0;
+    }
+
+    .force-arrow::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 12px solid #f7768e;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .force-arrow.active {
+      opacity: 1;
+      animation: forcePush 1s ease-out;
+    }
+
+    @keyframes forcePush {
+      0% {
+        width: 0;
+      }
+
+      100% {
+        width: 80px;
+      }
+    }
+
+    .spring {
+      position: absolute;
+      width: 150px;
+      height: 30px;
+      top: 250px;
+      left: 500px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .spring-coil {
+      width: 8px;
+      height: 30px;
+      background: linear-gradient(to bottom, #9ece6a 0%, #73daca 100%);
+      border-radius: 4px;
+      opacity: 0;
+    }
+
+    .spring.active .spring-coil {
+      opacity: 1;
+      animation: springCompress 1.5s ease-in-out infinite;
+    }
+
+    .spring-coil:nth-child(odd) {
+      animation-delay: 0.1s;
+    }
+
+    .spring-coil:nth-child(even) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes springCompress {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+      }
+
+      50% {
+        transform: scaleY(0.5);
+      }
+    }
+
+    .pendulum {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 200px;
+      background: var(--text-2);
+      transform-origin: top center;
+    }
+
+    .pendulum.active {
+      animation: swing 2s ease-in-out infinite;
+    }
+
+    .pendulum-bob {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #bb9af7, #9d7cd8);
+      box-shadow: 0 4px 12px rgba(187, 154, 247, 0.5);
+    }
+
+    @keyframes swing {
+
+      0%,
+      100% {
+        transform: translateX(-50%) rotate(-20deg);
+      }
+
+      50% {
+        transform: translateX(-50%) rotate(20deg);
+      }
+    }
+
+    .wave-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 150px;
+      margin-top: 24px;
+    }
+
+    .wave-bar {
+      width: 12px;
+      height: 40px;
+      background: linear-gradient(to top, #7aa2f7, #bb9af7);
+      border-radius: 6px;
+      opacity: 0;
+    }
+
+    .wave-container.active .wave-bar {
+      opacity: 1;
+      animation: wave 1.2s ease-in-out infinite;
+    }
+
+    .wave-bar:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .wave-bar:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .wave-bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .wave-bar:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+
+    .wave-bar:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+
+    .wave-bar:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+
+    .wave-bar:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+
+    .wave-bar:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+
+    .wave-bar:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+
+    .wave-bar:nth-child(10) {
+      animation-delay: 0.9s;
+    }
+
+    @keyframes wave {
+
+      0%,
+      100% {
+        height: 40px;
+      }
+
+      50% {
+        height: 100px;
+      }
+    }
+
+    .atom {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 40px auto;
+    }
+
+    .nucleus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      background: radial-gradient(circle, #f7768e, #db4b4b);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(247, 118, 142, 0.6);
+    }
+
+    .electron-orbit {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 2px solid rgba(122, 162, 247, 0.4);
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    .atom.active .electron-orbit {
+      opacity: 1;
+    }
+
+    .orbit1 {
+      width: 120px;
+      height: 80px;
+      margin-left: -60px;
+      margin-top: -40px;
+      transform: rotate(0deg);
+    }
+
+    .orbit2 {
+      width: 120px;
+      height: 80px;
+      margin-left: -60px;
+      margin-top: -40px;
+      transform: rotate(60deg);
+    }
+
+    .orbit3 {
+      width: 120px;
+      height: 80px;
+      margin-left: -60px;
+      margin-top: -40px;
+      transform: rotate(120deg);
+    }
+
+    .electron {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, #7aa2f7, #2ac3de);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(122, 162, 247, 0.8);
+    }
+
+    .orbit1 .electron {
+      animation: orbit1 2s linear infinite;
+      top: -6px;
+      left: 50%;
+      margin-left: -6px;
+    }
+
+    .orbit2 .electron {
+      animation: orbit2 2s linear infinite;
+      top: -6px;
+      left: 50%;
+      margin-left: -6px;
+    }
+
+    .orbit3 .electron {
+      animation: orbit3 2s linear infinite;
+      top: -6px;
+      left: 50%;
+      margin-left: -6px;
+    }
+
+    @keyframes orbit1 {
+      from {
+        transform: rotate(0deg) translateX(60px) rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg) translateX(60px) rotate(-360deg);
+      }
+    }
+
+    @keyframes orbit2 {
+      from {
+        transform: rotate(60deg) translateX(60px) rotate(-60deg);
+      }
+
+      to {
+        transform: rotate(420deg) translateX(60px) rotate(-420deg);
+      }
+    }
+
+    @keyframes orbit3 {
+      from {
+        transform: rotate(120deg) translateX(60px) rotate(-120deg);
+      }
+
+      to {
+        transform: rotate(480deg) translateX(60px) rotate(-480deg);
+      }
+    }
+
+    .equation {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      padding: 24px;
+      background: var(--surface-2);
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--accent);
+      margin-top: 24px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="deck">
+
+    <!-- Slide 1: Title -->
+    <section class="slide is-active">
+      <div class="slide-content" style="text-align: center; justify-content: center;">
+        <h1 data-anim="fade-up" style="font-size: 4rem; margin-bottom: 16px;">VẬT LÝ TƯƠNG TÁC</h1>
+        <p data-anim="fade-up" style="font-size: 1.8rem; color: var(--text-2); animation-delay: 0.2s;">Chuyển Động • Lực • Dao Động • Sóng • Nguyên Tử</p>
+        <p data-anim="fade-up" style="margin-top: 32px; color: var(--accent); animation-delay: 0.4s;">Nhấn phím → để tiếp tục • Nhấn S để xem ghi chú giảng</p>
+      </div>
+    </section>
+
+    <!-- Slide 2: Chuyển động -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">1. Chuyển Động & Lực</h2>
+        <p data-anim="fade-up" style="color: var(--text-2); animation-delay: 0.1s;">Định luật I Newton - Quán tính</p>
+
+        <div class="physics-diagram" data-anim="fade-up" style="animation-delay: 0.2s;">
+          <div class="ball" id="ball1"></div>
+          <div class="force-arrow" id="arrow1"></div>
+          <div style="position: absolute; bottom: 16px; left: 16px; color: var(--text-2); font-size: 0.9rem;">
+            Vật nghỉ sẽ tiếp tục nghỉ nếu không có lực tác dụng
+          </div>
+        </div>
+
+        <div class="click-hint" onclick="animateSlide2()" data-anim="fade-up" style="animation-delay: 0.3s;">
+          <span class="arrow">▼</span>
+          <span>Nhấn để xem lực đẩy</span>
+          <span class="arrow">▼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Lò xo -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">2. Lực đàn hồi - Định luật Hooke</h2>
+        <p data-anim="fade-up" style="color: var(--text-2); animation-delay: 0.1s;">F = -k.x</p>
+
+        <div class="physics-diagram" data-anim="fade-up" style="animation-delay: 0.2s;">
+          <div style="position: absolute; top: 100px; left: 100px; width: 400px; height: 4px; background: var(--text-2);"></div>
+          <div style="position: absolute; top: 90px; left: 100px; width: 60px; height: 20px; background: linear-gradient(90deg, #f7768e, #ff9e64); border-radius: 4px;"></div>
+          <div class="spring" id="spring1">
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+            <div class="spring-coil"></div>
+          </div>
+          <div style="position: absolute; bottom: 16px; left: 16px; color: var(--text-2); font-size: 0.9rem;">
+            Lực đàn hồi tỉ lệ thuận với độ biến dạng
+          </div>
+        </div>
+
+        <div class="click-hint" onclick="animateSlide3()" data-anim="fade-up" style="animation-delay: 0.3s;">
+          <span class="arrow">▼</span>
+          <span>Nhấn để nén lò xo</span>
+          <span class="arrow">▼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Con lắc -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">3. Dao Động Điều Hòa</h2>
+        <p data-anim="fade-up" style="color: var(--text-2); animation-delay: 0.1s;">Con lắc đơn</p>
+
+        <div class="physics-diagram" data-anim="fade-up" style="animation-delay: 0.2s;">
+          <div class="pendulum" id="pendulum1">
+            <div class="pendulum-bob"></div>
+          </div>
+          <div style="position: absolute; bottom: 16px; left: 16px; color: var(--text-2); font-size: 0.9rem;">
+            Chu kỳ T = 2π√(l/g) chỉ phụ thuộc vào chiều dài dây
+          </div>
+        </div>
+
+        <div class="click-hint" onclick="animateSlide4()" data-anim="fade-up" style="animation-delay: 0.3s;">
+          <span class="arrow">▼</span>
+          <span>Nhấn để thả con lắc</span>
+          <span class="arrow">▼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Sóng -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">4. Sóng Cơ Học</h2>
+        <p data-anim="fade-up" style="color: var(--text-2); animation-delay: 0.1s;">Sóng dọc và sóng ngang</p>
+
+        <div data-anim="fade-up" style="animation-delay: 0.2s; margin-top: 24px;">
+          <h3 style="margin-bottom: 16px;">Sóng ngang (trên dây)</h3>
+          <div class="wave-container" id="wave1">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+        </div>
+
+        <div class="click-hint" onclick="animateSlide5()" data-anim="fade-up" style="animation-delay: 0.3s;">
+          <span class="arrow">▼</span>
+          <span>Nhấn để truyền sóng</span>
+          <span class="arrow">▼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Nguyên tử -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">5. Cấu Trúc Nguyên Tử</h2>
+        <p data-anim="fade-up" style="color: var(--text-2); animation-delay: 0.1s;">Mô hình Bohr</p>
+
+        <div class="atom" id="atom1" data-anim="fade-up" style="animation-delay: 0.2s;">
+          <div class="nucleus"></div>
+          <div class="electron-orbit orbit1">
+            <div class="electron"></div>
+          </div>
+          <div class="electron-orbit orbit2">
+            <div class="electron"></div>
+          </div>
+          <div class="electron-orbit orbit3">
+            <div class="electron"></div>
+          </div>
+        </div>
+
+        <div style="text-align: center; color: var(--text-2);" data-anim="fade-up" style="animation-delay: 0.25s;">
+          <p>Hạt nhân (+) • Electron (-) quay quanh</p>
+        </div>
+
+        <div class="click-hint" onclick="animateSlide6()" data-anim="fade-up" style="animation-delay: 0.3s;">
+          <span class="arrow">▼</span>
+          <span>Nhấn để kích hoạt nguyên tử</span>
+          <span class="arrow">▼</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: Công thức -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2 data-anim="fade-up">Tóm Tắt Công Thức Quan Trọng</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px;">
+          <div class="equation" data-anim="fade-up" style="animation-delay: 0.1s;">F = m.a</div>
+          <div class="equation" data-anim="fade-up" style="animation-delay: 0.15s;">F = -k.x</div>
+          <div class="equation" data-anim="fade-up" style="animation-delay: 0.2s;">T = 2π√(l/g)</div>
+          <div class="equation" data-anim="fade-up" style="animation-delay: 0.25s;">v = λ.f</div>
+        </div>
+
+        <p data-anim="fade-up" style="text-align: center; margin-top: 32px; font-size: 1.3rem; color: var(--accent); animation-delay: 0.3s;">
+          Học tập là chìa khóa mở cánh cửa tương lai!
+        </p>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <aside class="notes">
+      <h3>Ghi chú giảng</h3>
+      <p><strong>Slide 1:</strong> Giới thiệu tổng quan về các chủ đề vật lý sẽ được trình bày hôm nay.</p>
+      <p><strong>Slide 2:</strong> Định luật I Newton nói về quán tính. Vật có xu hướng giữ nguyên trạng thái chuyển động. Chỉ khi có lực tác dụng mới làm thay đổi.</p>
+      <p><strong>Slide 3:</strong> Lực đàn hồi luôn ngược chiều với độ biến dạng. Định luật Hooke F = -k.x.</p>
+      <p><strong>Slide 4:</strong> Con lắc đơn dao động điều hòa gần đúng với biên độ nhỏ. Chu kỳ không phụ thuộc vào khối lượng và biên độ.</p>
+      <p><strong>Slide 5:</strong> Sóng truyền năng lượng chứ không truyền vật chất. Sóng ngang dao động vuông góc với phương truyền.</p>
+      <p><strong>Slide 6:</strong> Electron chuyển động trên các quỹ đạo xác định. Mô hình này giúp giải thích phổ vạch nguyên tử.</p>
+      <p><strong>Slide 7:</strong> Ôn tập các công thức quan trọng cần ghi nhớ.</p>
+    </aside>
+  </div>
+
+  <script src="../../assets/runtime.js"></script>
+  <script>
+    function animateSlide2() {
+      document.getElementById('ball1').classList.add('active');
+      document.getElementById('arrow1').classList.add('active');
+    }
+    function animateSlide3() {
+      document.getElementById('spring1').classList.add('active');
+    }
+    function animateSlide4() {
+      document.getElementById('pendulum1').classList.add('active');
+    }
+    function animateSlide5() {
+      document.getElementById('wave1').classList.add('active');
+    }
+    function animateSlide6() {
+      document.getElementById('atom1').classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
